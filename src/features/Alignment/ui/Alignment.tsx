@@ -21,9 +21,9 @@ export const Alignment = () => {
         setValues(data)
     }
 
-    const acid1Lenght = watch('acid_1') || ''
-    const acid2Lenght = watch('acid_2') || ''
-    const fieldEqual = acid1Lenght === acid2Lenght
+    const acid1 = watch('acid_1') || ''
+    const acid2 = watch('acid_2') || ''
+    const fieldEqual = acid1.length === acid2.length
 
     return (<>
             <div> Пример последовательностей:</div>
@@ -56,8 +56,8 @@ export const Alignment = () => {
 
             {values && (
                 <>
-                    <View value={values['acid_1']} withColors={false}/>
-                    <View value={values['acid_2']} withColors={true}/>
+                    <View value={values['acid_1']} withColors={true}/>
+                    <View value={values['acid_2']} withColors={false} highlightDifferences={true} shadowValue={values['acid_1']}/>
                 </>
             )}
 

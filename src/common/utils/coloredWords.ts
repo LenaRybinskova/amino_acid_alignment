@@ -1,4 +1,4 @@
-export const coloredWord = (letter: string): string | undefined => {
+export const coloredLetter = (letter: string): string | undefined => {
     const c = letter.toUpperCase();
     if (c === 'C') return 'var(--color-cysteine)';
     if ('AILMFWYVP'.includes(c)) return 'var(--color-hydrophobic)';
