@@ -1,0 +1,24 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+  --color-cysteine: #FFEA00;
+  --color-hydrophobic: #67E4A6;
+  --color-glycine: #C4C4C4;
+  --color-negative-charge: #FC9CAC;
+  --color-positive-charge: #BB99FF;
+  --color-polar-uncharged: #80BFFF;
+}
+
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+
+  line-height:1;
+  min-width: 320px;
+  min-height: 100vh;
+
+  background-color: var(--color-background-primary);
+  color: var(--color-text);
+}
