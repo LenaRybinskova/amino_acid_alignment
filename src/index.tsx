@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import {App} from './app/App';
 
-const App = () => {
-    return <h1>Hello React + Webpack + TypeScript!</h1>;
-};
+
 
 const root = ReactDOM.createRoot(document.getElementById('root')!);
 root.render(<App />);
