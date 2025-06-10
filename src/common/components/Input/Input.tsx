@@ -36,7 +36,7 @@ export const Input = <T extends Record<string, any>>({name, control, label, plac
 };*/
 
 
-import {Control, Controller, FieldValues, Path, RegisterOptions} from 'react-hook-form';
+import {Control, Controller, FieldValues, Path} from 'react-hook-form';
 import TextField from "@mui/material/TextField";
 
 type Props<T extends FieldValues> = {
@@ -48,14 +48,8 @@ type Props<T extends FieldValues> = {
     type?: string;
 };
 
-export const Input = <T extends FieldValues>({
-                                                 name,
-                                                 control,
-                                                 label,
-                                                 placeholder,
-                                                 type = "text",
-                                                 rules,
-                                             }: Props<T>) => {
+export const Input = <T extends FieldValues>({name, control, label, placeholder, type = "text", rules,}: Props<T>) => {
+
     return (
         <Controller
             name={name}

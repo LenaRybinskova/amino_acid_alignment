@@ -1,6 +1,10 @@
 import {Input} from '../../../common/components/Input/Input';
 import {useForm} from 'react-hook-form';
-import {Box, Button} from '@mui/material';
+import {Box} from '@mui/material';
+import {Btn} from '../../../common/components/Button/Button';
+import {alignmentRules} from './rules/aligment.rules'
+import {useState} from 'react';
+import {View} from '../ui/View/View';
 
 export type FormValue = {
     acid_1: string
@@ -8,55 +12,55 @@ export type FormValue = {
 }
 
 export const Alignment = () => {
+    const [values, setValues] = useState<FormValue | null>(null)
 
-    const {control, handleSubmit, formState: {errors, isValid}, watch} = useForm<FormValue>({mode: 'onChange'})
+    const {control, handleSubmit, formState: {isValid}, watch} = useForm<FormValue>({mode: 'onChange'})
 
     const onSubmit = (data: FormValue) => {
         console.log('Данные формы:', data)
+        setValues(data)
     }
 
     const acid1Lenght = watch('acid_1') || ''
     const acid2Lenght = watch('acid_2') || ''
+    const fieldEqual = acid1Lenght === acid2Lenght
 
+    return (<>
+            <div> Пример последовательностей:</div>
+            <br/>
+            <div>AAAAAA</div>
+            <div>GGGGGG</div>
+            <br/>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <Box sx={{display: 'flex', flexDirection: 'column', gap: 2}}>
+                    <Input
+                        name="acid_1"
+                        control={control}
+                        label="Введите первую последовательность"
+                        rules={alignmentRules}
+                    />
 
-        return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <Box sx={{display: 'flex', flexDirection: 'column', gap: 2}}>
-                <Input
-                    name="acid_1"
-                    control={control}
-                    label="acid_1"
-                    placeholder="Введите последовательность"
-                    rules={{
-                        required: 'Email обязателен',
-                        pattern: {
-                            value: /^[ARNDCEQGHILKMFPSTWYV-]+$/,
-                            message: 'можно добавить только ARNDCEQGHILKMFPSTWYV- символы',
-                        },
-                    }}
-                />
+                    <Input
+                        name="acid_2"
+                        control={control}
+                        label="Введите вторую последовательность"
+                        rules={alignmentRules}
+                    />
 
-                <Input
-                    name="acid_2"
-                    control={control}
-                    label="acid_2"
-                    placeholder="Введите последовательность"
-                    rules={{
-                        required: 'Email обязателен',
-                        pattern: {
-                            value: /^[ARNDCEQGHILKMFPSTWYV-]+$/,
-                            message: 'можно добавить только ARNDCEQGHILKMFPSTWYV- символы',
-                        },
-                    }}
-                />
+                    {!fieldEqual && <span>длина последовательностей не совпадает</span>}
 
-                <span></span>
+                    <Btn title={'Произвести выравнивание'} disabled={!isValid || !fieldEqual}/>
 
-                <Button type="submit" variant="contained" size="large"
-                        disabled={!isValid || acid1Lenght !== acid2Lenght} sx={{mt: 2}}>
-                    Отправить
-                </Button>
-            </Box>
-        </form>
+                </Box>
+            </form>
+
+            {values && (
+                <>
+                    <View value={values['acid_1']} withColors={false}/>
+                    <View value={values['acid_2']} withColors={true}/>
+                </>
+            )}
+
+        </>
     )
 }
