@@ -1,6 +1,6 @@
 import {Input} from '../../../common/components/Input/Input';
 import {useForm} from 'react-hook-form';
-import {Box} from '@mui/material';
+import {Box, Paper, Stack, Typography} from '@mui/material';
 import {Btn} from '../../../common/components/Button/Button';
 import {alignmentRules} from './rules/aligment.rules'
 import {useState} from 'react';
@@ -26,41 +26,58 @@ export const Alignment = () => {
     const fieldEqual = acid1.length === acid2.length
 
     return (<>
-            <div> Пример последовательностей:</div>
-            <br/>
-            <div>AAAAAA</div>
-            <div>GGGGGG</div>
-            <br/>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <Box sx={{display: 'flex', flexDirection: 'column', gap: 2}}>
-                    <Input
-                        name="acid_1"
-                        control={control}
-                        label="Введите первую последовательность"
-                        rules={alignmentRules}
-                    />
+            <Paper elevation={2} sx={{p: 3, mb: 4, borderRadius: 2}}>
+                <Typography variant="h4" component="h1" gutterBottom
+                            sx={{fontWeight: 600, color: '#1e1e1e', textAlign: 'center',}}>
+                    Выравнивание аминокислотных последовательностей
+                </Typography>
 
-                    <Input
-                        name="acid_2"
-                        control={control}
-                        label="Введите вторую последовательность"
-                        rules={alignmentRules}
-                    />
+            </Paper>
 
-                    {!fieldEqual && <span>длина последовательностей не совпадает</span>}
+            <Paper elevation={1} sx={{p: 3, mb: 4, borderRadius: 2, backgroundColor: '#f8f9fa'}}>
+                <Typography variant="h6" gutterBottom sx={{color: '#495057', fontWeight: 500}}>
+                    Пример последовательностей:
+                </Typography>
+                <Stack spacing={1}>
+                    <Box>AQGHIL</Box>
+                    <Box>NNNNLL</Box>
+                </Stack>
+            </Paper>
 
-                    <Btn title={'Произвести выравнивание'} disabled={!isValid || !fieldEqual}/>
+            <Paper elevation={2} sx={{p: 4, mb: 4, borderRadius: 2, mt: 6}}>
+                <Typography variant="h5" gutterBottom sx={{fontWeight: 500, color: '#1e1e1e', mb: 3,}}>
+                    Введите последовательности
+                </Typography>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <Stack spacing={3}>
 
-                </Box>
-            </form>
+                        <Input name="acid_1" control={control} label="Введите первую последовательность" rules={alignmentRules}/>
 
-            {values && (
-                <>
-                    <View value={values['acid_1']} withColors={true}/>
-                    <View value={values['acid_2']} withColors={false} highlightDifferences={true} shadowValue={values['acid_1']}/>
-                </>
-            )}
+                        <Input name="acid_2" control={control} label="Введите вторую последовательность" rules={alignmentRules}/>
 
+                        {!fieldEqual && <span>длина последовательностей не совпадает</span>}
+
+                        <Btn title={'Произвести выравнивание'} disabled={!isValid || !fieldEqual}/>
+
+                    </Stack>
+                </form>
+            </Paper>
+
+        {values && (
+            <Paper elevation={1} sx={{p: 3, mb: 4, borderRadius: 2, backgroundColor: '#e7f3ee'}}>
+                <Typography variant="h6" gutterBottom sx={{color: '#495057', fontWeight: 500}}>
+                    Результат выравнивания
+                </Typography>
+
+                <Stack spacing={1}>
+                    <Box>
+                        <View value={values["acid_1"]} withColors={true} />
+                    </Box>
+                    <Box>
+                        <View value={values["acid_2"]} withColors={false} highlightDifferences={true} shadowValue={values["acid_1"]}/>
+                    </Box>
+                </Stack>
+            </Paper>)}
         </>
     )
 }

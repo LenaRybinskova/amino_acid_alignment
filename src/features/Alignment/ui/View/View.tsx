@@ -1,3 +1,4 @@
+import {Box} from '@mui/material';
 import {coloredLetter} from '../../../../common/utils/coloredWords';
 
 type Props = {
@@ -8,14 +9,23 @@ type Props = {
 }
 
 export const View = ({withColors, value, shadowValue, highlightDifferences}: Props) => {
+    const commonSx = {
+        fontSize: "var(--font-size-secondary)",
+        fontWeight: "var(--font-weight)",
+        width: '24px',
+        height: '32px',
+        lineHeight: '32px',
+        display: 'inline-block',
+        textAlign: 'center',
+        borderRadius: '4px',
+    };
 
     const colored = value.split('').map((letter, index) => {
         const color = coloredLetter(letter);
-
         return (
-            <span key={index} style={{ color: color ?? 'inherit', marginRight: '0.25em' }}>
+            <Box key={index} component="span" sx={{...commonSx, color: color ?? 'inherit',}}>
                 {letter}
-            </span>
+            </Box>
         );
     });
 
@@ -27,22 +37,17 @@ export const View = ({withColors, value, shadowValue, highlightDifferences}: Pro
         return value.split('').map((letter, index) => {
             const isDifferent = letter !== shadowValue[index];
             return (
-                <span
-                    key={index}
-                    style={{
-                        backgroundColor: isDifferent ? 'red' : 'transparent',
-                        marginRight: '0.25em',
-                    }}
-                >
+                <Box key={index} component="span" sx={{...commonSx,
+                    backgroundColor: isDifferent ? 'var(--color-shadow)' : 'transparent'}}>
                     {letter}
-                </span>
+                </Box>
             );
         });
     };
 
     return (
-        <div>
+        <Box sx={{display: 'flex', gap: '4px', }}>
             {withColors ? colored : highlightedShadow()}
-        </div>
+        </Box>
     );
-};
+}
