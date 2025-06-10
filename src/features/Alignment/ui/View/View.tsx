@@ -13,35 +13,29 @@ export const View = ({withColors, value, shadowValue, highlightDifferences}: Pro
         const color = coloredLetter(letter);
 
         return (
-            <span
-                key={index}
-                style={{ color: color ?? 'inherit', marginRight: '0.25em' }}
-            >
-      {letter}
-    </span>
+            <span key={index} style={{ color: color ?? 'inherit', marginRight: '0.25em' }}>
+                {letter}
+            </span>
         );
     });
 
     const highlightedShadow = () => {
         if (!shadowValue || !highlightDifferences) {
-            // если нет shadowValue или флага - просто возвращаем plain string
             return value;
         }
 
         return value.split('').map((letter, index) => {
             const isDifferent = letter !== shadowValue[index];
-            const color = coloredLetter(letter);
             return (
                 <span
                     key={index}
                     style={{
-                        color: color ?? 'inherit',
-                        backgroundColor: isDifferent ? 'yellow' : 'transparent',
-                        padding: '0 2px',
+                        backgroundColor: isDifferent ? 'red' : 'transparent',
+                        marginRight: '0.25em',
                     }}
                 >
-          {letter}
-        </span>
+                    {letter}
+                </span>
             );
         });
     };
@@ -51,4 +45,4 @@ export const View = ({withColors, value, shadowValue, highlightDifferences}: Pro
             {withColors ? colored : highlightedShadow()}
         </div>
     );
-}
+};
