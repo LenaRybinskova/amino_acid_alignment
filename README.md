@@ -14,15 +14,14 @@
 После нажатия на кнопку происходит выравнивание (сравнение по символьно) последовательностей.
 Данные выводятся в столбик чередуясь по 3 символа из каждой последовательности.
 
-![Image alt](https://raw.githubusercontent.com/LenaRybinskova/amino_acid_alignment/dev/1.bmp)
+![Image alt](https://github.com/LenaRybinskova/amino_acid_alignment/blob/main/1.bmp)
 
-![Image alt](https://github.com/LenaRybinskova/amino_acid_alignment/blob/dev/2.bmp)
+![Image alt](https://github.com/LenaRybinskova/amino_acid_alignment/blob/main/2.bmp)
 
 
 Символы из первой последовательности окрашены в соответствии с цветовой схемой.
 Символы второй последовательности подсвечены в случае, если они отличаются от символа первой последовательности.
-
-![Image alt](https://github.com/LenaRybinskova/amino_acid_alignment/blob/dev/3.bmp)
+![Image alt](https://github.com/LenaRybinskova/amino_acid_alignment/blob/main/3.bmp)
 
 
 
