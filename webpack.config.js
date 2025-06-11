@@ -12,6 +12,12 @@ module.exports = {
     },
     resolve: {
         extensions: ['.tsx', '.ts', '.js'],
+        alias: {
+            '@utils': path.resolve(__dirname, 'src/common/utils/'),
+            '@features': path.resolve(__dirname, 'src/features/'),
+            '@components': path.resolve(__dirname, 'src/components/'),
+            'common': path.resolve(__dirname, 'src/common/'),
+        },
     },
     devtool: 'inline-source-map',
     devServer: {
@@ -34,8 +40,8 @@ module.exports = {
             {
                 test: /\.scss$/i,
                 use: ['style-loader', 'css-loader', 'sass-loader'],
-            }
-        ]
+            },
+        ],
     },
     plugins: [
         new HtmlWebpackPlugin({

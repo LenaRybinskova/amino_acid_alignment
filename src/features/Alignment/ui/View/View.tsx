@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import { coloredLetter } from '../../../../common/utils/coloredWords';
+import { coloredLetter } from '@utils/coloredWords';
 
 const CHUNK_SIZE = 3;
 

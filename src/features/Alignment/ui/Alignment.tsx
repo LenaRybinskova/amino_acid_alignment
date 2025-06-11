@@ -1,7 +1,7 @@
-import {Input} from '../../../common/components/Input/Input';
+import {Input} from 'common/components/Input/Input';
 import {useForm} from 'react-hook-form';
 import {Box, Paper, Stack, Typography} from '@mui/material';
-import {Btn} from '../../../common/components/Button/Button';
+import {Btn} from 'common/components/Button/Button';
 import {alignmentRules} from './rules/aligment.rules'
 import {useState} from 'react';
 import {AlignedView} from '../ui/View/View';

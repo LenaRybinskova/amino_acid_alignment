@@ -1,6 +1,13 @@
 {
   "compilerOptions": {
     "target": "ES6",
+    "baseUrl": "src",
+    "paths": {
+      "@utils/*": ["common/utils/*"],
+      "@features/*": ["features/*"],
+      "@components/*": ["components/*"],
+      "common/*": ["common/*"]
+    },
     "module": "ESNext",
     "jsx": "react-jsx",
     "moduleResolution": "node",
