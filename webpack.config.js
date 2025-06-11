@@ -8,10 +8,16 @@ module.exports = {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist'),
         clean: true,
-        publicPath: '/amino_acid_sequence/',
+        publicPath: '/amino_acid_alignment/',
     },
     resolve: {
         extensions: ['.tsx', '.ts', '.js'],
+        alias: {
+            '@utils': path.resolve(__dirname, 'src/common/utils/'),
+            '@features': path.resolve(__dirname, 'src/features/'),
+            '@components': path.resolve(__dirname, 'src/components/'),
+            'common': path.resolve(__dirname, 'src/common/'),
+        },
     },
     devtool: 'inline-source-map',
     devServer: {
@@ -30,7 +36,11 @@ module.exports = {
             {
                 test: /\.css$/i,
                 use: ['style-loader', 'css-loader'],
-            }
+            },
+            {
+                test: /\.scss$/i,
+                use: ['style-loader', 'css-loader', 'sass-loader'],
+            },
         ],
     },
     plugins: [
