@@ -8,7 +8,7 @@ module.exports = {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist'),
         clean: true,
-        publicPath: '/amino_acid_sequence/',
+        publicPath: '/amino_acid_alignment/',
     },
     resolve: {
         extensions: ['.tsx', '.ts', '.js'],

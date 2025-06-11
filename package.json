@@ -1,6 +1,6 @@
 {
   "name": "my-react-webpack-ts",
-  "homepage": "https://LenaRybinskova.github.io/amino_acid_sequence/",
+  "homepage": "https://LenaRybinskova.github.io/amino_acid_alignment/",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
