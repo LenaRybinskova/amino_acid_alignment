@@ -25,17 +25,16 @@ export const Alignment = () => {
     const acid2 = watch('acid_2') || ''
     const fieldEqual = acid1.length === acid2.length
 
-    return (<>
-            <Paper elevation={2} sx={{p: 3, mb: 4, borderRadius: 2}}>
-                <Typography variant="h4" component="h1" gutterBottom
-                            sx={{fontWeight: 600, color: '#1e1e1e', textAlign: 'center',}}>
+    return (
+        <>
+            <Paper elevation={2} sx={{ mb: 4,}}>
+                <Typography variant="h4" component="h1" gutterBottom>
                     Выравнивание аминокислотных последовательностей
                 </Typography>
-
             </Paper>
 
-            <Paper elevation={1} sx={{p: 3, mb: 4, borderRadius: 2, backgroundColor: '#f8f9fa'}}>
-                <Typography variant="h6" gutterBottom sx={{color: '#495057', fontWeight: 500}}>
+            <Paper elevation={1} sx={{ mb: 4, backgroundColor: '#f8f9fa'}}>
+                <Typography variant="h6" gutterBottom sx={{color: "var(--color-background-paper-primary)", fontWeight: 500, fontSize: 'inherit'}}>
                     Пример последовательностей:
                 </Typography>
                 <Stack spacing={1}>
@@ -44,16 +43,18 @@ export const Alignment = () => {
                 </Stack>
             </Paper>
 
-            <Paper elevation={2} sx={{p: 4, mb: 4, borderRadius: 2, mt: 6}}>
-                <Typography variant="h5" gutterBottom sx={{fontWeight: 500, color: '#1e1e1e', mb: 3,}}>
+            <Paper elevation={2} sx={{mb: 4, mt: 6}}>
+                <Typography variant="h5" gutterBottom sx={{fontWeight: 500, mb: 3,}}>
                     Введите последовательности
                 </Typography>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Stack spacing={3}>
 
-                        <Input name="acid_1" control={control} label="Введите первую последовательность" rules={alignmentRules}/>
+                        <Input name="acid_1" control={control} label="Введите первую последовательность"
+                               rules={alignmentRules}/>
 
-                        <Input name="acid_2" control={control} label="Введите вторую последовательность" rules={alignmentRules}/>
+                        <Input name="acid_2" control={control} label="Введите вторую последовательность"
+                               rules={alignmentRules}/>
 
                         {!fieldEqual && <span>длина последовательностей не совпадает</span>}
 
@@ -63,21 +64,22 @@ export const Alignment = () => {
                 </form>
             </Paper>
 
-        {values && (
-            <Paper elevation={1} sx={{p: 3, mb: 4, borderRadius: 2, backgroundColor: '#e7f3ee'}}>
-                <Typography variant="h6" gutterBottom sx={{color: '#495057', fontWeight: 500}}>
-                    Результат выравнивания
-                </Typography>
+            {values && (
+                <Paper elevation={1} sx={{ mb: 4,  backgroundColor: "var(--color-background-secondary)"}}>
+                    <Typography variant="h6" gutterBottom >
+                        Результат выравнивания
+                    </Typography>
 
-                <Stack spacing={1}>
-                    <Box>
-                        <View value={values["acid_1"]} withColors={true} />
-                    </Box>
-                    <Box>
-                        <View value={values["acid_2"]} withColors={false} highlightDifferences={true} shadowValue={values["acid_1"]}/>
-                    </Box>
-                </Stack>
-            </Paper>)}
+                    <Stack spacing={1}>
+                        <Box>
+                            <View value={values['acid_1']} withColors={true}/>
+                        </Box>
+                        <Box>
+                            <View value={values['acid_2']} withColors={false} highlightDifferences={true}
+                                  shadowValue={values['acid_1']}/>
+                        </Box>
+                    </Stack>
+                </Paper>)}
         </>
     )
 }
