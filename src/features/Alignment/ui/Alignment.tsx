@@ -4,7 +4,7 @@ import {Box, Paper, Stack, Typography} from '@mui/material';
 import {Btn} from '../../../common/components/Button/Button';
 import {alignmentRules} from './rules/aligment.rules'
 import {useState} from 'react';
-import {View} from '../ui/View/View';
+import {AlignedView} from '../ui/View/View';
 
 export type FormValue = {
     acid_1: string
@@ -64,22 +64,7 @@ export const Alignment = () => {
                 </form>
             </Paper>
 
-            {values && (
-                <Paper elevation={1} sx={{ mb: 4,  backgroundColor: "var(--color-background-secondary)"}}>
-                    <Typography variant="h6" gutterBottom >
-                        Результат выравнивания
-                    </Typography>
-
-                    <Stack spacing={1}>
-                        <Box>
-                            <View value={values['acid_1']} withColors={true}/>
-                        </Box>
-                        <Box>
-                            <View value={values['acid_2']} withColors={false} highlightDifferences={true}
-                                  shadowValue={values['acid_1']}/>
-                        </Box>
-                    </Stack>
-                </Paper>)}
+            {values && <AlignedView value1={values['acid_1']} value2={values['acid_2']}/>}
         </>
     )
 }

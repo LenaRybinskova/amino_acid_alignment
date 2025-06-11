@@ -1,17 +1,25 @@
-import {Box} from '@mui/material';
-import {coloredLetter} from '../../../../common/utils/coloredWords';
+import { Box } from '@mui/material';
+import { coloredLetter } from '../../../../common/utils/coloredWords';
+
+const CHUNK_SIZE = 3;
+
+const chunkArray = <T,>(arr: T[], size: number): T[][] => {
+    const chunks: T[][] = [];
+    for (let i = 0; i < arr.length; i += size) {
+        chunks.push(arr.slice(i, i + size));
+    }
+    return chunks;
+};
 
 type Props = {
-    value: string
-    withColors: boolean
-    shadowValue?: string
-    highlightDifferences?: boolean
-}
+    value1: string;
+    value2: string;
+};
 
-export const View = ({withColors, value, shadowValue, highlightDifferences}: Props) => {
+export const AlignedView = ({ value1, value2 }: Props) => {
     const commonSx = {
-        fontSize: "var(--font-size-secondary)",
-        fontWeight: "var(--font-weight)",
+        fontSize: 'var(--font-size-secondary)',
+        fontWeight: 'var(--font-weight)',
         width: '24px',
         height: '32px',
         lineHeight: '32px',
@@ -20,34 +28,46 @@ export const View = ({withColors, value, shadowValue, highlightDifferences}: Pro
         borderRadius: '4px',
     };
 
-    const colored = value.split('').map((letter, index) => {
-        const color = coloredLetter(letter);
-        return (
-            <Box key={index} component="span" sx={{...commonSx, color: color ?? 'inherit',}}>
-                {letter}
-            </Box>
-        );
-    });
+    const chunks1 = chunkArray(value1.split(''), CHUNK_SIZE);
+    const chunks2 = chunkArray(value2.split(''), CHUNK_SIZE);
 
-    const highlightedShadow = () => {
-        if (!shadowValue || !highlightDifferences) {
-            return value;
-        }
+    const maxBlocks = Math.max(chunks1.length, chunks2.length);
+    const rows = [];
 
-        return value.split('').map((letter, index) => {
-            const isDifferent = letter !== shadowValue[index];
-            return (
-                <Box key={index} component="span" sx={{...commonSx,
-                    backgroundColor: isDifferent ? 'var(--color-shadow)' : 'transparent'}}>
-                    {letter}
+    for (let i = 0; i < maxBlocks; i++) {
+        if (i < chunks1.length) {
+            const startIndex = i * CHUNK_SIZE;
+            rows.push(
+                <Box key={`v1-${i}`} sx={{ display: 'flex', gap: '4px' }}>
+                    {chunks1[i].map((letter, idx) => (
+                        <Box key={startIndex + idx} component="span" sx={{ ...commonSx, color: coloredLetter(letter) ?? 'inherit' }}>
+                            {letter}
+                        </Box>
+                    ))}
                 </Box>
             );
-        });
-    };
+        }
 
-    return (
-        <Box sx={{display: 'flex', gap: '4px', }}>
-            {withColors ? colored : highlightedShadow()}
-        </Box>
-    );
-}
+        if (i < chunks2.length) {
+            const startIndex = i * CHUNK_SIZE;
+            rows.push(
+                <Box key={`v2-${i}`} sx={{ display: 'flex', gap: '4px' }}>
+                    {chunks2[i].map((letter, idx) => {
+                        const globalIndex = startIndex + idx;
+                        const isDifferent = value1[globalIndex] !== letter;
+                        return (
+                            <Box
+                                key={globalIndex}
+                                component="span"
+                                sx={{...commonSx, backgroundColor: isDifferent ? 'var(--color-shadow)' : 'transparent',}}>
+                                {letter}
+                            </Box>
+                        );
+                    })}
+                </Box>
+            );
+        }
+    }
+
+    return <Box sx={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>{rows}</Box>;
+};
