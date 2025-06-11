@@ -14,7 +14,7 @@
 После нажатия на кнопку происходит выравнивание (сравнение по символьно) последовательностей.
 Данные выводятся в столбик чередуясь по 3 символа из каждой последовательности.
 
-![Image alt](https://github.com/LenaRybinskova/amino_acid_alignment/blob/dev/1.bmp)
+![Image alt](https://raw.githubusercontent.com/LenaRybinskova/amino_acid_alignment/dev/1.bmp)
 
 ![Image alt](https://github.com/LenaRybinskova/amino_acid_alignment/blob/dev/2.bmp)
 
